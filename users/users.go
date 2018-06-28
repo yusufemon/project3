@@ -1,7 +1,6 @@
 package users
 
 import (
-	"fmt"
 	"database/sql"
 	_ "github.com/mattn/go-sqlite3"
 	"log"
@@ -42,7 +41,6 @@ func Insert(id int, name string, balance int) string {
 
 	stmt, err := db.Prepare("insert into users(id, name, balance) values(?,?,?)")
 	checkErr(err)
-	fmt.Println("masuk")
 	defer stmt.Close()
 
 	stmt.Exec(id, name, balance)
