@@ -13,8 +13,10 @@ import (
 // }
 
 func TestInsert(t *testing.T) {
+	// fmt.Println("masuk1")
 	got := Insert(3,"tester",30000)
 	want := "Insert Success"
+	// fmt.Println("masuk")
 	if got != want {
 		t.Errorf("Insert(3,'tester_insert',30000) == %q, want %q", got, want)
 	}

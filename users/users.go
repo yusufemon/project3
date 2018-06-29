@@ -4,9 +4,10 @@ import (
 	"database/sql"
 	_ "github.com/mattn/go-sqlite3"
 	"log"
+	"os"
 )
 
-var db, err = sql.Open("sqlite3", "../src/github.com/yusufemon/project3/project3.db")
+var db, err = sql.Open("sqlite3", os.Getenv("GOPATH")+"/src/github.com/yusufemon/project3/project3.db")
 
 type Data struct {
 	Id int
@@ -77,6 +78,6 @@ func Delete(id int) string {
 
 func checkErr(err error) {
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 }
