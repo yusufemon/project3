@@ -1,0 +1,27 @@
+language: go
+
+go:
+  - 1.10.3
+
+branches:
+  only:
+    - master
+    - develop
+
+addons:
+  apt:
+    packages:
+      - sqlite3
+
+before_install:
+  - sqlite3 project1.db "create table users (id integer primary key, name varchar not null, balance integer)"
+  - go get -t github.com/kardianos/govendor
+
+before_script:
+  - go build ./users/users.go
+
+install:
+  - govendor install +local
+
+script:
+  - govendor test +local
