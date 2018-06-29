@@ -14,7 +14,7 @@ addons:
       - sqlite3
 
 before_install:
-  - sqlite3 project1.db "create table users (id integer primary key, name varchar not null, balance integer)"
+  - sqlite3 project3.db "create table users (id integer primary key, name varchar not null, balance integer)"
   - go get -t github.com/kardianos/govendor
   - govendor sync
 
