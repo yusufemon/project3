@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"strconv"
 
 	"github.com/gorilla/mux"
 	"github.com/yusufemon/project3/users"
@@ -36,7 +37,9 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	json.NewDecoder(r.Body).Decode(user.Data)
+	user.Data.Id, _ = strconv.Atoi(r.FormValue("id"))
+	user.Data.Name = r.FormValue("name")
+	user.Data.Balance, _ = strconv.Atoi(r.FormValue("balance"))
 	response, err := user.Insert(user.Data.Id, user.Data.Name, user.Data.Balance)
 	if err != nil {
 		log.Fatal(err)
@@ -49,7 +52,9 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	json.NewDecoder(r.Body).Decode(user.Data)
+	user.Data.Id, _ = strconv.Atoi(r.FormValue("id"))
+	user.Data.Name = r.FormValue("name")
+	user.Data.Balance, _ = strconv.Atoi(r.FormValue("balance"))
 	response, err := user.Update(user.Data.Id, user.Data.Name, user.Data.Balance)
 	if err != nil {
 		log.Fatal(err)
@@ -62,7 +67,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	json.NewDecoder(r.Body).Decode(user.Data)
+	user.Data.Id, _ = strconv.Atoi(r.FormValue("id"))
 	response, err := user.Delete(user.Data.Id)
 	if err != nil {
 		log.Fatal(err)
