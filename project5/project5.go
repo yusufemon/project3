@@ -11,22 +11,30 @@ import (
 
 func main() {
 	method := os.Args[1]
-	user, err := usersd.New()
+	user, err := users.New()
 	checkErr(err)
 	switch method {
 	case "get":
-		fmt.Println(user.Get())
+		data, err := user.Get()
+		checkErr(err)
+		fmt.Println(data)
 	case "insert":
 		id := getId()
 		name, balance := getNameAndBalance()
-		fmt.Println(user.Insert(id, name, balance))
+		response, err := user.Insert(id, name, balance)
+		checkErr(err)
+		fmt.Println(response)
 	case "update":
 		id := getId()
 		name, balance := getNameAndBalance()
-		fmt.Println(user.Update(id, name, balance))
+		response, err := user.Update(id, name, balance)
+		checkErr(err)
+		fmt.Println(response)
 	case "delete":
 		id := getId()
-		fmt.Println(user.Delete(id))
+		response, err := user.Delete(id)
+		checkErr(err)
+		fmt.Println(response)
 	}
 }
 
