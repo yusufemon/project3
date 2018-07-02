@@ -2,29 +2,31 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"strconv"
-	"log"
-	
+
 	"github.com/yusufemon/project3/users"
 )
 
 func main() {
 	method := os.Args[1]
+	user, err := usersd.New()
+	checkErr(err)
 	switch method {
-		case "get":
-			fmt.Println(users.Get())
-		case "insert":
-			id := getId()
-			name, balance := getNameAndBalance()
-			fmt.Println(users.Insert(id, name, balance))
-		case "update":
-			id := getId()
-			name, balance := getNameAndBalance()
-			fmt.Println(users.Update(id, name, balance))
-		case "delete":
-			id := getId()
-			fmt.Println(users.Delete(id))
+	case "get":
+		fmt.Println(user.Get())
+	case "insert":
+		id := getId()
+		name, balance := getNameAndBalance()
+		fmt.Println(user.Insert(id, name, balance))
+	case "update":
+		id := getId()
+		name, balance := getNameAndBalance()
+		fmt.Println(user.Update(id, name, balance))
+	case "delete":
+		id := getId()
+		fmt.Println(user.Delete(id))
 	}
 }
 
@@ -41,7 +43,7 @@ func getNameAndBalance() (string, int) {
 	checkErr(err)
 
 	return name, balance
-} 
+}
 
 func checkErr(err error) {
 	if err != nil {

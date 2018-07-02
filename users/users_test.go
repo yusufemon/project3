@@ -1,12 +1,13 @@
-package users
+package users_test
 
 import (
 	"testing"
-	// "github.com/yusufemon/project3/users"
+
+	"github.com/yusufemon/project3/users"
 )
 
 func TestGet(t *testing.T) {
-	user, _ := New()
+	user, _ := users.New()
 	_, err := user.Get()
 	if err != nil {
 		t.Errorf("method user.Get() is error, error message %q", err)
@@ -14,7 +15,7 @@ func TestGet(t *testing.T) {
 }
 
 func TestInsert(t *testing.T) {
-	user, _ := New()
+	user, _ := users.New()
 	got, _ := user.Insert(3, "tester", 30000)
 	want := "Insert Success"
 	if got != want {
@@ -23,7 +24,7 @@ func TestInsert(t *testing.T) {
 }
 
 func TestUpdate(t *testing.T) {
-	user, _ := New()
+	user, _ := users.New()
 	got, _ := user.Update(3, "tester_update", 3000)
 	want := "Update Success"
 	if got != want {
@@ -32,7 +33,7 @@ func TestUpdate(t *testing.T) {
 }
 
 func TestDelete(t *testing.T) {
-	user, _ := New()
+	user, _ := users.New()
 	got, _ := user.Delete(3)
 	want := "Delete Success"
 	if got != want {

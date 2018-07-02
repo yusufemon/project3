@@ -9,7 +9,8 @@ import (
 )
 
 type User struct {
-	db *sql.DB
+	db   *sql.DB
+	Data Data
 }
 
 type Data struct {
