@@ -21,20 +21,20 @@ func main() {
 	case "insert":
 		id := getId()
 		name, balance := getNameAndBalance()
-		response, err := user.Insert(id, name, balance)
+		err := user.Insert(id, name, balance)
 		checkErr(err)
-		fmt.Println(response)
+		fmt.Println("OK")
 	case "update":
 		id := getId()
 		name, balance := getNameAndBalance()
-		response, err := user.Update(id, name, balance)
+		err := user.Update(id, name, balance)
 		checkErr(err)
-		fmt.Println(response)
+		fmt.Println("OK")
 	case "delete":
 		id := getId()
-		response, err := user.Delete(id)
+		err := user.Delete(id)
 		checkErr(err)
-		fmt.Println(response)
+		fmt.Println("OK")
 	}
 }
 

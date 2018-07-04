@@ -1,11 +1,10 @@
 package users
 
 import (
+	"database/sql"
 	"os"
 
 	_ "github.com/mattn/go-sqlite3"
-
-	"database/sql"
 )
 
 type User struct {
@@ -50,50 +49,50 @@ func (user User) Get() ([]Data, error) {
 	return data, nil
 }
 
-func (user User) Insert(id int, name string, balance int) (string, error) {
+func (user User) Insert(id int, name string, balance int) error {
 	db := user.db
 	stmt, err := db.Prepare("insert into users(id, name, balance) values(?,?,?)")
 	if err != nil {
-		return "", err
+		return err
 	}
 	defer stmt.Close()
 
 	stmt.Exec(id, name, balance)
 	if err != nil {
-		return "", err
+		return err
 	}
 
-	return "Insert Success", nil
+	return nil
 }
 
-func (user User) Update(id int, name string, balance int) (string, error) {
+func (user User) Update(id int, name string, balance int) error {
 	db := user.db
 	stmt, err := db.Prepare("update users set name=?, balance=? where id=?")
 	if err != nil {
-		return "", err
+		return err
 	}
 	defer stmt.Close()
 
 	stmt.Exec(name, balance, id)
 	if err != nil {
-		return "", err
+		return err
 	}
 
-	return "Update Success", nil
+	return nil
 }
 
-func (user User) Delete(id int) (string, error) {
+func (user User) Delete(id int) error {
 	db := user.db
 	stmt, err := db.Prepare("delete from users where id=?")
 	if err != nil {
-		return "", err
+		return err
 	}
 	defer stmt.Close()
 
 	stmt.Exec(id)
 	if err != nil {
-		return "", err
+		return err
 	}
 
-	return "Delete Success", nil
+	return nil
 }

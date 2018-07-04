@@ -7,8 +7,11 @@ import (
 )
 
 func TestGet(t *testing.T) {
-	user, _ := users.New()
-	_, err := user.Get()
+	user, err := users.New()
+	if err != nil {
+		t.Errorf("method user.Get() is error, error message %q", err)
+	}
+	_, err = user.Get()
 	if err != nil {
 		t.Errorf("method user.Get() is error, error message %q", err)
 	}
@@ -16,27 +19,24 @@ func TestGet(t *testing.T) {
 
 func TestInsert(t *testing.T) {
 	user, _ := users.New()
-	got, _ := user.Insert(3, "tester", 30000)
-	want := "Insert Success"
-	if got != want {
-		t.Errorf("Insert(3,'tester_insert',30000) == %q, want %q", got, want)
+	err := user.Insert(3, "tester", 30000)
+	if err != nil {
+		t.Errorf("method user.Insert(3,'tester_insert',30000) is error, error message %q", err)
 	}
 }
 
 func TestUpdate(t *testing.T) {
 	user, _ := users.New()
-	got, _ := user.Update(3, "tester_update", 3000)
-	want := "Update Success"
-	if got != want {
-		t.Errorf("Update(3,'tester_update',3000000) == %q, want %q", got, want)
+	err := user.Update(3, "tester_update", 3000)
+	if err != nil {
+		t.Errorf("method user.Update(3,'tester_update',3000000) is error, error message %q", err)
 	}
 }
 
 func TestDelete(t *testing.T) {
 	user, _ := users.New()
-	got, _ := user.Delete(3)
-	want := "Delete Success"
-	if got != want {
-		t.Errorf("Delete(3) == %q, want %q", got, want)
+	err := user.Delete(3)
+	if err != nil {
+		t.Errorf("method user.Delete(3) is error, error message %q", err)
 	}
 }

@@ -40,11 +40,11 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	user.Data.Id, _ = strconv.Atoi(r.FormValue("id"))
 	user.Data.Name = r.FormValue("name")
 	user.Data.Balance, _ = strconv.Atoi(r.FormValue("balance"))
-	response, err := user.Insert(user.Data.Id, user.Data.Name, user.Data.Balance)
+	err = user.Insert(user.Data.Id, user.Data.Name, user.Data.Balance)
 	if err != nil {
 		log.Fatal(err)
 	}
-	json.NewEncoder(w).Encode(response)
+	json.NewEncoder(w).Encode("{status:'ok',response:'insert success'}")
 }
 
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
@@ -55,11 +55,11 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	user.Data.Id, _ = strconv.Atoi(r.FormValue("id"))
 	user.Data.Name = r.FormValue("name")
 	user.Data.Balance, _ = strconv.Atoi(r.FormValue("balance"))
-	response, err := user.Update(user.Data.Id, user.Data.Name, user.Data.Balance)
+	err = user.Update(user.Data.Id, user.Data.Name, user.Data.Balance)
 	if err != nil {
 		log.Fatal(err)
 	}
-	json.NewEncoder(w).Encode(response)
+	json.NewEncoder(w).Encode("{status:'ok',response:'update success'}")
 }
 
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
@@ -68,9 +68,9 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	user.Data.Id, _ = strconv.Atoi(r.FormValue("id"))
-	response, err := user.Delete(user.Data.Id)
+	err = user.Delete(user.Data.Id)
 	if err != nil {
 		log.Fatal(err)
 	}
-	json.NewEncoder(w).Encode(response)
+	json.NewEncoder(w).Encode("{status:'ok',response:'delete success'}")
 }
