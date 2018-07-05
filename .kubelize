@@ -1,0 +1,23 @@
+templateVersion: v2.2.0
+projectName: project3
+services:
+- name: webservice
+  port: "8000"
+  environments:
+  - name: production
+    replica: "2"
+  - name: sandbox
+    replica: "1"
+  - name: staging
+    replica: "1"
+  nodePort: "38000"
+  healthz: healthz
+  maxMem: "2"
+  maxCpu: "2"
+  minMem: "0.5"
+  minCpu: "1"
+  limit: false
+  timeout: "1"
+  delay: "30"
+  language: go
+  consul: envconsul

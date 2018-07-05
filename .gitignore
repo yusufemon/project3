@@ -1,3 +1,5 @@
 main/*
 vendor/github.com/*
+deploy/_output/*
 *.db
+env.sample
